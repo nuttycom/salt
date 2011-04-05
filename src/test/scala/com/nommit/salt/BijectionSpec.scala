@@ -15,33 +15,18 @@
  *  under the License.
  */
 
-package hylotech.util
+package com.nommit.salt
 
-object HLists {
-  sealed trait HList {
-    type Head
-    type Tail <: HList
-  }
+import org.specs.Specification
+import Bijection._
 
-  final class HNil extends HList {
-    type Head = Nothing
-    type Tail = HNil
-
-    def :+:[T](v : T) = HCons(v, this)
-  }
-
-  val HNil = new HNil()
-
-  final case class HCons[H, T <: HList](head : H, tail : T) extends HList {
-    type This = H :+: T
-    type Head = H
-    type Tail = T
-
-    def :+:[T](v : T) = HCons(v, this)
-  }
-
-  type :+:[H, T <: HList] = HCons[H, T]
-  object :+: {
-    def unapply[H, T <: HList](in: HCons[H, T]): Option[(H, T)] = Some(in.head, in.tail)
+class BijectionSpec extends Specification {
+  "a bijection" should {
+    "be implicitly applicable" in {
+      val str: String = 123.as[String]
+      str must be equalTo("123")
+      val num: Int = "123".as[Int]
+      num must be equalTo(123)
+    }
   }
 }

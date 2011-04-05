@@ -1,8 +1,4 @@
-/*
- * Continuous.scala
- */
-
-package hylotech.util
+package com.nommit.salt
 
 case class Interval[T: Ordering](start : Option[T], end : Option[T]) {
   import scala.math.Ordered._

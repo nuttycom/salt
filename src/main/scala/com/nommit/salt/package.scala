@@ -15,10 +15,9 @@
  *  under the License.
  */
 
-package hylotech
+package com.nommit
 
-
-package object util {
+package object salt {
   def using[A, B](resource: A)(f: A => B)(implicit close: Close[A]): B = {
     try {
       f(resource)
@@ -32,7 +31,7 @@ package object util {
   object implicits extends Implicits
 }
 
-package util {
+package salt {
   trait Implicits {
     implicit def IOClose[T <: java.io.Closeable]: Close[T] = new Close[T] {
       def close(a: T) = a.close

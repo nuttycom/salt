@@ -15,7 +15,7 @@
  *  under the License.
  */
 
-package hylotech.util
+package com.nommit.salt
 
 sealed trait Unapply[A, B] {
   def unapply(b: B): A
